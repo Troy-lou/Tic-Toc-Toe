@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        .main{
+            width: 300px;
+            height: 300px;
+            display: grid;
+            grid-template-columns: repeat(3,33.33%);
+            grid-template-columns: repeat(3,33.33%);
+        }
+        .main div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #333;
+        }
+        .tool{
+            margin-top: 10px;
+        }
+        .tool button{
+            margin: 5px;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+    </div>
+    <div class="tool">
+        <button disabled>对局进行中</button>
+        <button>对局重置</button>
+    </div>
+    <script>
+        // 定义变量
+        // const USER='X'
+        // const USEU='O'
+        // 存放落子区域的数组
+        const btns=[]
+
+
+        // 获取main盒子
+        const main=document.querySelector('.main')
+        // 获取tool盒子里面的按钮
+        const tools=document.querySelectorAll('button')
+        //  清空
+        tools[1].onclick=()=>{
+            btns.forEach(btn=>btn.textContent='')
+        }
+
+        // 创建
+        const f=document.createDocumentFragment()
+        // 创建div,绑定事件和添加数组里面
+        for(let i=0;i<9;i++){
+           const btn=document.createElement('div')
+                 
+           //    按钮点击事件
+                btn.onclick = () => {
+                    let end = btns.filter(btn => btn.textContent === '')
+                    if(kn() !== true){
+                        // btn.textContent = ''
+                    // }else{
+
+                        if(btn.textContent === ''){
+                            if (end.length % 2 !== 0) {
+                                btn.textContent = 'x'
+                                
+                                // btns[i].btn.textContent === 'x'
+                            } else if (end.length % 2 === 0) {
+                                btn.textContent = 'o'
+                                // btns[i].btn.textContent === 'o'
+                            }
+                        }
+                    }
+                }
+                //    加到数组中
+                btns.push(btn);
+                // 加到碎片中
+                f.appendChild(btn)                
+                // 添加到main
+                main.appendChild(f)
+                // if(kn()==true){
+                //     break
+                // }
+
+            }
+               
+           
+              
+        // 定义坐标系
+            // let board = [];
+            function kn(){
+        
+            const result = [
+                    [0, 1, 2],
+                    [3, 4, 5],
+                    [6, 7, 8],
+                    [0, 3, 6],
+                    [1, 4, 7],
+                    [2, 5, 8],
+                    [0, 4, 8],
+                    [2, 4, 6]
+                ];
+                    for(let j=0;j<result.length;j++){
+                        // const [a,b,c]=result[j]
+                        // console.log(result[j])
+                        if(
+                            // btns[a].filter(btn => btn.textContent === 'x') &&
+                            // btns[b].filter(btn => btn.textContent === 'x') &&
+                            // btns[c].filter(btn => btn.textContent === 'x')
+                            result[j]===result[j].filter(btn => btn.textContent === 'x')&&
+                            result[j]===result[j].filter(btn => btn.textContent === 'o')
+                        ){
+                            return result[j]
+                        }
+                        // const res= result[j].filter(btn => btn.textContent === 'o')
+                        // console.log(res)
+                    }
+                    // console.log(result[j])
+                }
+                // const btna= [a, b, c]
+                // // let winX = btna.filter(btn => btn.textContent === 'x')
+                // // let tranO = btna.filter(btn => btn.textContent === 'o')
+                // // const match(btna){
+                //     function kn() {
+                //     if(
+
+                //         // btns[a].btn.textContent === 'x'&&
+                //         // btns[b].btn.textContent === 'x'&&
+                //         // btns[c].btn.textContent === 'x'
+                //         btna.filter(btn => btn.textContent === 'x')&&
+                //         btna.filter(btn => btn.textContent === 'o')
+                //         ){
+                //             return
+                //         }
+                //     }
+
+                // }
+
+
+
+
+            //    function kn(){
+            //        if(winX&& result){
+            //            return true
+            //        }
+            //    } 
+
+    </script>
+</body>
+</html>
